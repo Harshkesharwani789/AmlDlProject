@@ -1,0 +1,30 @@
+{
+  "checkpoint": "none",
+  "untrained": false,
+  "total_params": 9980620,
+  "onnx_export": true,
+  "onnx_fp32_path": "results/deployment/yolact.onnx",
+  "onnx_int8_path": "results/deployment/yolact_int8.onnx",
+  "benchmark_results": [
+    {
+      "backend": "PyTorch FP32",
+      "device": "mps",
+      "avg_latency_ms": 318.3,
+      "std_latency_ms": 23.3,
+      "fps": 3.1,
+      "model_size_mb": 38.17,
+      "num_runs": 50
+    },
+    {
+      "backend": "ONNX FP32",
+      "device": "CPU (ONNX Runtime)",
+      "avg_latency_ms": 120.26,
+      "std_latency_ms": 6.73,
+      "fps": 8.3,
+      "model_size_mb": 0.6,
+      "num_runs": 50,
+      "model_path": "results/deployment/yolact.onnx"
+    }
+  ],
+  "pipeline_time_s": 32.2
+}
