@@ -1,122 +1,84 @@
+# 🔍 High-Density Object Segmentation
+
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch">
   <img src="https://img.shields.io/badge/ONNX-Runtime-005CED?style=for-the-badge&logo=onnx&logoColor=white" alt="ONNX">
-  <img src="https://img.shields.io/badge/Next.js-15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js">
-  <img src="https://img.shields.io/badge/License-MIT-000000?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js">
 </p>
 
-<h1 align="center">🔍 High-Density Object Segmentation System</h1>
-
-<p align="center">
-  <strong>A Multi-Phase Hybrid Neuro-Symbolic Framework for Retail Analytics</strong><br/>
-  <em>Optimized for Dense Scene Inference and Occlusion Robustness</em>
-</p>
-
-<p align="center">
-  <a href="#-core-features">Key Features</a> •
-  <a href="#-technical-architecture">Architecture</a> •
-  <a href="#-performance-benchmarks">Benchmarks</a> •
-  <a href="#-getting-started">Getting Started</a> •
-  <a href="#-academic-report">Report</a>
-</p>
+A state-of-the-art **Hybrid Neuro-Symbolic Framework** designed for detecting and segmenting objects in extremely dense retail environments. This project addresses the challenges of severe occlusion and near-identical appearances in high-density scenes (100+ objects per image).
 
 ---
 
-## 🎯 Project Overview
-
-This repository hosts a state-of-the-art framework for **High-Density Object Segmentation**, specifically engineered for retail environments where occlusion and object density (up to 700+ items per frame) render standard detectors ineffective. 
-
-Our approach integrates **YOLACT-based Deep Learning** with a **Neuro-Symbolic Spatial Reasoning Engine**, achieving superior localization and confidence recalibration.
-
-### 🌟 Key Features
-- 🚀 **Real-time Inference**: Optimized ONNX pipeline delivering ~8.3 FPS on standard CPUs.
-- 🧠 **Hybrid Reasoning**: Integrated GMM-KDE spatial prior for shelf-aware detection.
-- 🛡️ **Soft-NMS Integration**: Gaussian-decayed suppression to preserve overlapping detections.
-- 📊 **Comprehensive Analytics**: Built-in EDA and ablation study frameworks.
-- 🌐 **Web Integration**: Full-stack Next.js dashboard for model comparison and custom uploads.
+## 🌟 Key Features
+- **🚀 Real-time Performance**: Optimized ONNX inference (8.3 FPS on CPU).
+- **🧠 Hybrid Intelligence**: Combines Deep Learning (YOLACT) with Probabilistic Graphical Models (GMM/KDE).
+- **🔬 Advanced Refinement**: Implements **Soft-NMS** and **CBAM Attention** for superior mask precision.
+- **🌐 Web Dashboard**: Interactive Next.js interface for model visualization and real-time testing.
 
 ---
 
-## 🏛️ Technical Architecture
+## 🏗️ Methodology: The Three-Phase Evolution
+The project follows a structured progression from classical methods to a sophisticated hybrid system:
 
-### 1. Detection Backbone (Phase 2)
-The system utilizes a **MobileNetV3-Large** backbone coupled with a **Feature Pyramid Network (FPN)** and **CBAM (Convolutional Block Attention Module)** for efficient feature extraction and multi-scale detection.
+| Phase | Paradigm | Methodology | Primary Goal |
+| :--- | :--- | :--- | :--- |
+| **Phase 1** | Classical | HOG + SVM + Sliding Window | Establishing spatial feature baselines. |
+| **Phase 2** | Deep Learning | YOLACT + MobileNetV3 + Soft-NMS | Real-time instance segmentation core. |
+| **Phase 3** | Hybrid | Neuro-Symbolic Fusion | Refining detections via spatial priors. |
 
-### 2. Neuro-Symbolic Fusion (Phase 3)
-A learnable **Gated Spatial Attention** mechanism recalibrates detection confidence based on environmental priors (Shelf Row Structure via GMM & Point Density via KDE).
-
----
-
-## 📈 Performance Benchmarks
-
-### Detection Accuracy (SKU-110K Dataset)
-| Model Variant | Val Loss | mAP@0.5 | Efficiency |
-|:--- |:---:|:---:|:---:|
-| **Classical (HOG+SVM)** | — | 2.10% | 0.2 FPS |
-| **YOLACT (Baseline)** | 3.145 | 2.73% | 3.1 FPS |
-| **Hybrid (Proposed)** | **3.097** | **3.03%** | 3.0 FPS |
+> [!TIP]
+> **Soft-NMS** is critical: Switching to standard Hard-NMS results in a catastrophic **98.4% drop in mAP** due to dense object overlapping.
 
 ---
 
-## 🚀 Getting Started
+## 📈 Performance at a Glance
+| Model Configuration | Val Loss | Inference (CPU) | Model Size |
+| :--- | :--- :| :--- :| :--- |
+| **YOLACT (Baseline)** | 3.145 | 120ms | 38.2 MB |
+| **Hybrid (Refined)** | **3.097** | 128ms | 38.3 MB |
 
-### 📦 Installation
+---
 
+## 🚀 Quick Start
+
+### 1. Installation
 ```bash
-# Clone and enter directory
 git clone https://github.com/Harshkesharwani789/AmlDlProject.git
 cd AmlDlProject
-
-# Setup environment
-python -m venv .venv
-source .venv/bin/activate
 pip install -r requirements.txt
 pip install -e .
 ```
 
-### 🛠️ Execution Pipeline
+### 2. Run the Full Pipeline
+```bash
+# Initialize data
+bash scripts/download_data.sh
 
-1. **Data Prep**: `bash scripts/download_data.sh`
-2. **Exploration**: `python scripts/run_eda.py`
-3. **Training**: `python scripts/train.py --config configs/default.yaml`
-4. **Evaluation**: `python scripts/evaluate.py`
-5. **Web Demo**: `cd web && npm run dev`
+# Train & Evaluate
+python scripts/train.py --config configs/default.yaml
+python scripts/evaluate.py
+```
 
----
-
-## 📂 Repository Structure
-
-- `src/models/`: Core neural architectures and spatial reasoning logic.
-- `scripts/`: Production-ready entry points for training and evaluation.
-- `web/`: Next.js frontend for interactive model demonstration.
-- `report/`: Academic documentation and project findings in LaTeX.
-- `configs/`: Hyperparameter and environment specifications.
-
----
-
-## 👥 Contributors
-
-- **Siddhartha Shukla** - [GitHub](https://github.com/SiddharthaShukla8)
-- **Harsh Gupta** - [GitHub](https://github.com/Harshkesharwani789)
-
----
-
-## 📜 License & Citation
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-```bibtex
-@article{shukla2026high,
-  title={High-Density Object Segmentation in Retail Scenes},
-  author={Shukla, Siddhartha and Gupta, Harsh},
-  journal={B.Tech Final Year Project - CS},
-  year={2026}
-}
+### 3. Launch Web Demo
+```bash
+cd web
+npm install && npm run dev
 ```
 
 ---
-<p align="center">
-  Developed at the Department of Computer Science<br/>
-  <strong>Applied Machine Learning & Deep Learning Project 2026</strong>
-</p>
+
+## 📂 Project Structure
+- `src/models/` - Core architectures (YOLACT, Hybrid, Spatial Engines).
+- `scripts/` - Entry points for training, evaluation, and export.
+- `web/` - Full-stack Next.js web application.
+- `report/` - Comprehensive technical documentation and LaTeX sources.
+
+---
+
+## 📜 License & Authors
+Distributed under the **MIT License**.
+
+**Siddhartha Shukla** & **Harsh Gupta**  
+*Applied Machine Learning & Deep Learning Project*
