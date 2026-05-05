@@ -210,7 +210,7 @@ def build():
     story.append(Spacer(1, 8))
     story.append(
         Paragraph(
-            "Applied Machine Learning / Deep Learning &mdash; Phase 2",
+            "Advanced Machine Learning / Deep Learning &mdash; Phase 2",
             ParagraphStyle("s", fontName="Helvetica", fontSize=11, textColor=SUBTLE),
         )
     )

@@ -81,4 +81,4 @@ npm install && npm run dev
 Distributed under the **MIT License**.
 
 **Siddhartha Shukla** & **Harsh Gupta**  
-*Applied Machine Learning & Deep Learning Project*
+*Advanced Machine Learning & Deep Learning Project*

@@ -15,7 +15,7 @@
 
 ## What Is This Project?
 
-This is a **B.Tech Final Year Applied Machine Learning & Deep Learning project** that implements a complete **instance segmentation system** for detecting and segmenting individual products on densely packed retail store shelves.
+This is a **B.Tech Final Year Advanced Machine Learning & Deep Learning project** that implements a complete **instance segmentation system** for detecting and segmenting individual products on densely packed retail store shelves.
 
 In simple terms: imagine you take a photograph of a supermarket shelf filled with 100-400 products crammed together, overlapping each other, and you want a computer to:
 1. **Find every single product** in the image (even if products are partially hidden behind others)
@@ -136,7 +136,7 @@ The model is only **9.98M parameters** and **0.6MB ONNX size**:
 
 - **Siddhartha Shukla** (Roll No: 230107)
 - **Harsh Gupta** (Roll No: 230128)
-- **Course:** Applied Machine Learning & Deep Learning
+- **Course:** Advanced Machine Learning & Deep Learning
 - **Level:** B.Tech Final Year Project (2026)
 - **License:** MIT (open source)
 
